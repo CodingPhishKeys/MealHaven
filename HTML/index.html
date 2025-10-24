@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MealHaven</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../CSS/index.css" />
+  </head>
+  <body>
+    <!-- Top Navigation -->
+    <header class="topbar" role="banner">
+      <div class="brand">
+        <div class="logo">🍃</div>
+        <div class="brand-text">
+          <h1>MealHaven</h1>
+          <span class="tagline">Plan smart • Waste less • Eat better</span>
+        </div>
+      </div>
+
+      <nav class="tabs" aria-label="Primary">
+        <button class="tab active" data-view="home" aria-current="page">
+          Home
+        </button>
+        <button class="tab" data-view="recipes">Recipes</button>
+        <button class="tab" data-view="planner">Meal Planner</button>
+        <button class="tab" data-view="pantry">Pantry</button>
+        <button class="tab" data-view="favourites">Favourites</button>
+        <div class="spacer"></div>
+        <div class="profile">
+          <button id="notifBtn" class="icon-btn" aria-label="Notifications">
+            <span class="bell" aria-hidden="true">🔔</span>
+            <span id="notifBadge" class="badge" hidden>0</span>
+          </button>
+          <button
+            id="profileBtn"
+            class="avatar"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-label="Profile menu"
+          >
+            KM
+          </button>
+          <div id="profileMenu" class="menu" role="menu" hidden>
+            <button data-view="profile" role="menuitem">
+              Profile & Settings
+            </button>
+            <button id="toggleThemeBtn" role="menuitem">Toggle theme</button>
+            <button id="logoutBtn" role="menuitem">Logout</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="views">
+      <!-- HOME / DASHBOARD -->
+      <section id="home" class="view active">
+        <div class="grid grid-3">
+          <article class="card span-2">
+            <header class="card-head">
+              <h2>Trending Recipes</h2>
+              <button class="link-btn" data-view="recipes">View all →</button>
+            </header>
+            <div id="trendingGrid" class="recipe-grid"></div>
+          </article>
+
+          <aside class="card">
+            <header class="card-head"><h3>Expiring Soon</h3></header>
+            <ul id="expiringList" class="list list-compact"></ul>
+            <footer class="card-foot">
+              <button class="link-btn" data-view="pantry">Open Pantry →</button>
+            </footer>
+          </aside>
+
+          <article class="card">
+            <header class="card-head"><h3>Pantry Items</h3></header>
+            <div id="pantrySummary" class="stats"></div>
+          </article>
+
+          <article class="card span-2">
+            <header class="card-head"><h2>Weekly Plan</h2></header>
+            <div id="weeklySnapshot" class="week-strip"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- RECIPES -->
+      <section id="recipes" class="view">
+        <div class="toolbar">
+          <h2>Recipes</h2>
+          <input
+            id="recipeSearch"
+            class="input"
+            type="search"
+            placeholder="Search recipes…"
+          />
+        </div>
+        <div id="recipeList" class="recipe-grid"></div>
+      </section>
+
+      <!-- MEAL PLANNER -->
+      <section id="planner" class="view">
+        <div class="toolbar">
+          <h2>Meal Planner</h2>
+          <div class="toolbar-actions">
+            <button id="prevMonth" class="btn" aria-label="Previous month">
+              ◀
+            </button>
+            <h3 id="monthLabel" aria-live="polite"></h3>
+            <button id="nextMonth" class="btn" aria-label="Next month">
+              ▶
+            </button>
+          </div>
+        </div>
+        <div
+          id="calendar"
+          class="calendar"
+          role="grid"
+          aria-label="Calendar"
+        ></div>
+      </section>
+
+      <!-- PANTRY -->
+      <section id="pantry" class="view">
+        <div class="toolbar">
+          <h2>Pantry</h2>
+          <div class="toolbar-actions">
+            <input
+              id="pantrySearch"
+              class="input"
+              placeholder="Search pantry…"
+            />
+            <button id="addPantryBtn" class="btn primary">+ Add Item</button>
+          </div>
+        </div>
+
+        <div class="filters">
+          <button class="chip active" data-status="all">All</button>
+          <button class="chip" data-status="in">In Stock</button>
+          <button class="chip" data-status="low">Low</button>
+          <button class="chip" data-status="out">Out</button>
+        </div>
+
+        <table class="table" aria-label="Pantry table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Unit</th>
+              <th>Expiry</th>
+              <th>Status</th>
+              <th class="right"></th>
+            </tr>
+          </thead>
+          <tbody id="pantryTable"></tbody>
+        </table>
+      </section>
+
+      <!-- FAVOURITES -->
+      <section id="favourites" class="view">
+        <div class="toolbar"><h2>Favourites</h2></div>
+        <div id="favList" class="recipe-grid"></div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="profile" class="view">
+        <div class="profile-wrap card">
+          <div class="profile-row">
+            <div class="avatar xl">KM</div>
+            <div>
+              <h2>Kenosi Modise</h2>
+              <p>Preferences & Settings</p>
+            </div>
+          </div>
+          <hr />
+          <div class="settings">
+            <label class="switch">
+              <input type="checkbox" id="metricToggle" checked />
+              <span>Use metric system</span>
+            </label>
+            <label class="switch">
+              <input type="checkbox" id="notifyToggle" checked />
+              <span>Enable notifications</span>
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- DIALOGS -->
+    <dialog id="pantryDialog" class="modal">
+      <form method="dialog" class="modal-body" id="pantryForm">
+        <h3>Add Pantry Item</h3>
+        <div class="form-grid">
+          <label>Item <input name="name" required /></label>
+          <label
+            >Quantity
+            <input type="number" name="qty" min="0" step="1" value="1" required
+          /></label>
+          <label
+            >Unit
+            <select name="unit">
+              <option>pcs</option>
+              <option>g</option>
+              <option>kg</option>
+              <option>ml</option>
+              <option>l</option>
+            </select>
+          </label>
+          <label>Expiry <input type="date" name="expiry" /></label>
+        </div>
+        <menu class="modal-actions">
+          <button class="btn" value="cancel">Cancel</button>
+          <button class="btn primary" value="default">Save</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <dialog id="planDialog" class="modal">
+      <form method="dialog" class="modal-body" id="planForm">
+        <h3>Add to Meal Plan</h3>
+        <div class="form-grid">
+          <label>Date <input type="date" name="date" required /></label>
+          <label
+            >Meal
+            <select name="slot">
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+            </select>
+          </label>
+        </div>
+        <menu class="modal-actions">
+          <button class="btn" value="cancel">Cancel</button>
+          <button class="btn primary" value="default">Add</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <!-- Scripts -->
+    <script src="../JAVASCRIPT/index.js"></script>
+  </body>
+</html>

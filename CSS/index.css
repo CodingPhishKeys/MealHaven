@@ -1,0 +1,428 @@
+/* ───────────────────────────────
+   Base Theme & Variables
+─────────────────────────────── */
+:root {
+  --brand: #2ecc71;
+  --brand-dark: #27ae60;
+  --bg: #f7f8fa;
+  --text: #1a1a1a;
+  --muted: #666;
+  --card: #fff;
+  --border: #e2e5ea;
+  --shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  --radius: 10px;
+
+  --max-width: 1200px;
+  --transition: 0.25s ease;
+  --gap: 1.5rem;
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+  --line: 1.6;
+}
+
+body.light {
+  --bg: #f7f8fa;
+  --text: #1a1a1a;
+  --card: #fff;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: var(--line);
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ───────────────────────────────
+   Layout & Containers
+─────────────────────────────── */
+main {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+/* ───────────────────────────────
+   Header / Navbar
+─────────────────────────────── */
+.topbar {
+  background: var(--card);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand .logo {
+  font-size: 2rem;
+}
+
+.brand h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.brand .tagline {
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: block;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.tab.active,
+.tab:hover {
+  background: var(--brand);
+  color: #fff;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.avatar {
+  background: var(--brand);
+  color: #fff;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.avatar.xl {
+  width: 80px;
+  height: 80px;
+  font-size: 1.5rem;
+}
+
+.menu {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.menu button {
+  padding: 1rem 1.25rem;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.menu button:hover {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* ───────────────────────────────
+   Cards & Grids
+─────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card + .card {
+  margin-top: 1.5rem;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  gap: var(--gap);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ───────────────────────────────
+   Buttons
+─────────────────────────────── */
+.btn,
+.link-btn {
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+}
+
+.btn {
+  background: var(--brand);
+  color: #fff;
+  padding: 0.8rem 1.4rem;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background: var(--brand-dark);
+}
+
+.btn.primary {
+  background: var(--brand);
+  color: #fff;
+}
+
+.link-btn {
+  background: none;
+  color: var(--brand-dark);
+  font-weight: 500;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* ───────────────────────────────
+   Lists, Tables, Chips
+─────────────────────────────── */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem;
+}
+
+.table th {
+  text-align: left;
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.table tr:hover {
+  background: #f3f3f3;
+}
+
+.chip {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all var(--transition);
+}
+
+.chip.active,
+.chip:hover {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+}
+
+/* ───────────────────────────────
+   Modals & Forms
+─────────────────────────────── */
+.modal {
+  border: none;
+  border-radius: var(--radius);
+  padding: 0;
+  box-shadow: var(--shadow);
+  width: min(90%, 420px);
+}
+
+.modal-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.input,
+select,
+input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* ───────────────────────────────
+   Responsive Sections
+─────────────────────────────── */
+@media (max-width: 960px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .tabs {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  main {
+    padding: 1.5rem;
+    gap: 2rem;
+  }
+
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .brand h1 {
+    font-size: 1.1rem;
+  }
+
+  .tabs {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .table th,
+  .table td {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+
+  .toolbar,
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+/* ───────────────────────────────
+   Dark Mode (Toggle)
+─────────────────────────────── */
+body.dark {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #f4f4f4;
+  --muted: #aaa;
+  --border: #333;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .tab.active {
+  background: var(--brand-dark);
+}
+
+body.dark .card,
+body.dark .table th {
+  background: #1e1e1e;
+}
+
+body.dark .table tr:hover {
+  background: #2a2a2a;
+}

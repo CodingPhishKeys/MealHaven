@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
     splashScreen.style.opacity = "0";
 
     setTimeout(function () {
-      splashScreen.style.display = "none";
+      window.location.href = "../HTML/index.html";
     }, 800);
   }, 2500);
 });
